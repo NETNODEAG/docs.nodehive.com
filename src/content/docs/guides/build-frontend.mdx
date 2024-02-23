@@ -2,28 +2,96 @@
 title: NodeHive Frontend Documentation
 description: TODO
 ---
-# NodeHive Frontend Documentation
 
-## Official starter template for NextJS
+## Next.js Starter Template
 
-https://github.com/NETNODEAG/nodehive-nextjs-starter
+:::note
+This is a starter template for Next.js. It includes a NodeHive backend and a Next.js frontend. The frontend is pre-configured to work with the NodeHive backend. You can use this template to start your own project.
+Recommended Node Version >= v18.19.0
+
+- GitHub Repository: https://github.com/NETNODEAG/nodehive-nextjs-starter
+- Example project: https://nodehive-nextjs-starter.vercel.app
+  :::
+
+### 1. Create a new project
 
 ```bash
-npx create-next-app frontend.example.ch -e https://github.com/NETNODEAG/nodehive-nextjs-starter/tree/main
+npx create-next-app frontend.demo.ch -e https://github.com/NETNODEAG/nodehive-nextjs-starter/tree/main
 ```
 
-### Example .env
+### 2. Copy the .env.example file
 
+Copy the `.env.example` file to `.env.local` and adjust the values.
+
+```bash
+# Drupal Backend
+NEXT_PUBLIC_DRUPAL_REST_BASE_URL="https://demo.nodehive.app"
+NEXT_PUBLIC_DRUPAL_BASE_URL="https://demo.nodehive.app"
+NEXT_IMAGE_DOMAIN="demo.nodehive.app"
+
+# NodeHive
+NEXT_PUBLIC_NODEHIVE_SPACE_ID=1
+NODEHIVE_STARTPAGE_SLUG=/node/1
+NODEHIVE_DEFAULT_LANGUAGE=en
+
+# Next.js Frontend
+NEXT_PUBLIC_FRONTEND_BASE_URL="http://localhost:3000"
 ```
-  # Required for NodeHive
-  NEXT_PUBLIC_DRUPAL_REST_BASE_URL="https://yourinstance.nodehive.app"
-  NEXT_PUBLIC_DRUPAL_BASE_URL="https://yourinstance.nodehive.app"
-  NEXT_IMAGE_DOMAIN="yourinstance.nodehive.app"
-  NEXT_PUBLIC_NODEHIVE_SPACE_ID=1
-  NODEHIVE_STARTPAGE_SLUG=/node/1
-  NODEHIVE_DEFAULT_LANGUAGE=en
+
+### 3. Run the project
+
+```bash
+cd frontend.demo.ch
+npm run dev
 ```
 
-## Custom frontend
+### 4. Activate the NodeHive power
 
-You can use any frontend technology you like. The NodeHive backend offers a range of apis you need to get familiar.
+You can login into the Frontend, to see the NodeHive toolbar and start to edit content and settings much faster.
+
+Go to `http://localhost:3000/nodehive/login` and login with the your credentials
+
+### 5. Start developing
+
+You can start developing your frontend now. The NodeHive backend is already configured and you can start to query the data from the backend.
+
+## Config files
+
+### jsonapi.config.ts
+
+This files contains the configuration for the jsonapi client. You can define here the entity types and the fields you want to use in your frontend.
+It allows you to query and filter resources.
+
+[Drupal JSON-API Params](https://github.com/d34dman/drupal-jsonapi-params)
+
+#### NodeHive Integration
+
+```typescript
+export const NodeHiveConfig = {
+  entities: {
+    'node-page': {
+      addFilter: [['status', '1']],
+      addFields: ['title', 'field_media', 'field_paragraphs'],
+      addInclude: ['field_media.field_media_image', 'field_paragraphs'],
+    },
+    'node-article': {
+      addFields: ['title', 'field_tags'],
+      addInclude: ['field_tags'],
+    },
+
+    'nodehive_fragment--space_logo': {
+      addFilter: [['status', '1']],
+      addFields: ['title', 'field_logo'],
+      addInclude: ['field_logo'],
+    },
+  },
+};
+```
+
+### space.config.ts
+
+This file contains the configuration for the space. You can define the site name, the default metatags, favicons and open graph tags.
+
+## Frontend Stack
+
+We recommend using Next.js for your frontend. It is a great framework for building modern web applications. But you can use any frontend technology you like. The NodeHive backend offers a range of apis you need to get familiar.
