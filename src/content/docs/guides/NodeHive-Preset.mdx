@@ -1,0 +1,57 @@
+---
+title: Preset & Beekeeper
+description: TODO
+---
+
+# NodeHive Preset & Beekeeper
+
+## What is it?
+Beekeeper is a way to manage "presets" which is a set of configurations for a NodeHive instance. A preset applies all defined configurations as "hard" configurations. Hard means, it's always overwriting, nevertheless a config was set via UI. It's a similar concept like Drupal recipes.
+
+## Why?
+This is useful, because we want to provide a basic set of configurations with NodeHive Core and there is no other way to do that when updating NodeHive.
+
+## Drush commands
+
+Install NodeHive core preset:
+```
+drush beekeeper:install
+# Equivalent to the line above
+drush beekeeper:install --preset=core
+```
+
+You can create your own presets and apply as follows:
+
+```
+drush beekeeper:install --preset=your_preset_name
+```
+
+```
+# To apply NodeHive core preset, run
+drush beekeeper:install --preset=nodehive
+
+# To only apply NodeHive core permission preset, run
+drush beekeeper:permission:install --preset=nodehive
+
+# To only apply NodeHive core menu preset, run
+drush beekeeper:menu:install --preset=nodehive
+
+# To only apply NodeHive core drush commands preset, run
+drush beekeeper:drush:install --preset=nodehive
+```
+
+## Create a custom preset
+
+In your custom module, create the following folders and files:
+
+```
+> yourmodule
+  > config
+    > beekeper
+      > your_preset_name (use any name you like)
+        > default
+          /{add any drupal config yml here}
+        > beekeeper.drush.yml
+        > beekeeper.menu.yml
+        > beekeeper.permission.yml
+```

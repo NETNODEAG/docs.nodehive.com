@@ -1,0 +1,69 @@
+---
+title: Content Modelling
+description: Explain the core concepts of the content model of NodeHive Headless CMS
+---
+# NodeHive Content Modelling
+
+At the core of NodeHive is modelling the content structures you need for your specific use case.
+
+## NodeHive instance
+
+> Mental Model: The NodeHive instances is your actual backend application
+
+Every customer gets its own NodeHive instance - for example https://your-company.nodehive.app. The NodeHive instance has it's own database, user management and can be hosted wherever it needs to be hosted. Within one NodeHive instance, you can setup the following content structures.
+
+## Spaces
+
+**Mental Model:**
+
+> Content Space = Website.
+
+Within one NodeHive instance you can create multiple Spaces/Websites. You are able to define who can access what space, what content types, menus and configurations are available.
+
+**Example:** You have a digital infrastructure with www.netnode.ch a HR/employer branding related page jobs.netnode.ch and a event page 20jahre.netnode.ch. All this websites are spaces and managed from one NodeHive instance. They can also share content.
+
+Naming: Within the product, Spaces are also called NodeHive Space, Content Space.
+
+## Content Types
+
+Mental Model: Think a content type as a representation of a content piece with predefined fields and a slug.
+
+Example: For example a "blog article" can have a title, teaser text, blog image, a category, tags and paragraphs.
+
+You can create as many content types you want.
+
+## Paragraph Types
+
+Mental Model: Think a paragraph as a section of a content type.
+
+Example: Let's say you have a content type "Landing Page". For this landing page you want a "hero paragraph", "text paragraphe", "customers paragraph", "gallery paragraph" and "get in touch paragraph".
+
+You can create as many paragraphs types you want. Each paragraph type can be assigned to a content type.
+
+## Taxonomy Types
+
+Mental Model: A taxonomy is a category.
+
+Example: For your blog, you want the main blog category with terms "Marketing Guides", "Technology Guides" and "Transformation Guides". You also want to have a "Tagging Tagonomy" so you can create a taxonomy tags which allows you to create new "taxonomy terms".
+
+## Menus
+
+Mental Model: Think of the main navigation, footer navigation or any navigation you need on your website.
+
+Example: You want a main navigation with "Home", "Services" and "About". Services should have 3 subnavigation points like "Service 1", "Service 2", "Service 3".
+
+You can create as many menus as you want and assign it to one or multiple spaces.
+
+
+## Fragment Types and Areas
+
+Mental Model for fragments: Think of fragments generic content objects that can be used to make any content editable
+
+Example: You have a website and you want to show social media links in the footer. You want to be able to edit the social media links and it's icons. You can create a fragment type "Social Media items". Through the fragments UI, any editor can edit this content object.
+
+Mental Model for areas: Think of areas as a list of fragments
+
+Example: You have an alert section at the top of your application. Now you can define an "area" called "Alert" which then can have none, one or multiple fragements. This way they can set the "new open hours alert" as well as "spring promotion banner".
+
+
+

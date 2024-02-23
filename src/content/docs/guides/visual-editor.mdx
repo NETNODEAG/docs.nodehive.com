@@ -1,0 +1,19 @@
+---
+title: Visual Editor
+description: TODO
+---
+# NodeHive Visual Editor
+
+NodeHive comes with a visual editor which helps content editors work with content directly from the frontend. To enable the visual editor, the frontend code needs to communicate with NodeHive.
+
+# NPM packages WIP
+
+We'll release a NPM packages that helps you enable the visual editor integration of NodeHive.
+
+# Configure SSL on localhost
+```js
+mkcert -install
+mkcert localhost
+npm install -g local-ssl-proxy
+local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem
+```

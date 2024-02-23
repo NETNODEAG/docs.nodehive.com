@@ -1,0 +1,34 @@
+---
+title: Selfhost NodeHive
+description: TODO
+---
+# Selfhost NodeHive
+
+NodeHive is open source, so you can selfhost yourself. NodeHive is built on top of Drupal (www.drupal.org) it is a PHP application.
+
+## Requirements
+
+Running NodeHive/Drupal requires a webhost which runs
+
+- PHP 8.2
+- MariaDB, MySQL
+
+## Install NodeHive
+
+Check [getting-started](/get-started) to install NodeHive locally
+
+## Update NodeHive
+
+```bash
+ ddev composer update
+ ddev drush updb
+```
+
+## Run in production
+
+There are a lot of ways to run NodeHive/Drupal in production.
+
+### Recommended
+
+- Wrap your codebase with a docker-compose.yml and deploy to a VPS
+- Use a Drupal hosting provider: https://www.drupal.org/hosting
