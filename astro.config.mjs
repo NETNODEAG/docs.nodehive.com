@@ -6,6 +6,11 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'NodeHive Headless CMS',
+			logo: {
+				light: './src/assets/nodehive_logo_black.svg',
+				dark: './src/assets/nodehive_logo_white.svg',
+				replacesTitle: true,
+			},
 			social: {
 				github: 'https://github.com/withastro/starlight',
 			},
@@ -20,7 +25,7 @@ export default defineConfig({
 						{ label: 'FAQ', link: '/overview/faq/' },
 						{ label: 'Videos', link: '/overview/videos/' },
 						{ label: 'About', link: '/overview/about/' },
-						
+
 					],
 				},
 				{
@@ -48,7 +53,7 @@ export default defineConfig({
 						{ label: 'Fetching Fragments & Areas', link: '/reference/fetching-fragments-areas/' },
 						{ label: 'Fetching translated paths', link: '/reference/fetching-translated-paths/' },
 					],
-					
+
 				},
 			],
 		}),
