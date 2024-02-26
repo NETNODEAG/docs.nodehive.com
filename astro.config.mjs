@@ -12,7 +12,10 @@ export default defineConfig({
 				replacesTitle: true,
 			},
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/NETNODEAG/nodehive-headless-cms-ce',
+			},
+			editLink: {
+				baseUrl: 'https://github.com/NETNODEAG/docs.nodehive.com',
 			},
 			sidebar: [
 				{
