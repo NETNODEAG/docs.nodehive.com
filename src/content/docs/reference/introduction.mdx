@@ -1,0 +1,85 @@
+---
+title: NodeHive JavaScript Client / SDK
+description: TODO
+---
+
+NodeHive Client (https://www.npmjs.com/package/nodehive-js) is the offical JavaScript client library for JavaScript client library for NodeHive Headless CMS.
+
+## Goal
+
+The client library exists to make data access to the backend super easy. It offers several helper functions which allow you to load nodes, menus, taxonomies and much more without understanding the underlaying details.
+
+## How to use
+
+#### Install
+
+```bash
+  npm install nodehive-js
+```
+
+### Code example with React and Tailwind
+
+```js
+  // Create NodeHiveClient instance
+  const client = new NodeHiveClient(
+    process.env.NEXT_PUBLIC_DRUPAL_REST_BASE_URL,
+    NodeHiveConfig,
+    options
+  );
+```
+
+#### Load articles
+
+```js
+  // Load articles
+  const nodes = client.getNodes('articles')
+```
+
+#### Load the last 10 articles with sorting, limit and tag filter
+
+```js
+  // Add custom api params
+  const apiParams = new DrupalJsonApiParams();
+  apiParams.addSort('created', 'DESC');
+  apiParams.addInclude(['field_image']);
+  apiParams.addPageLimit(10);
+  apiParams.addFilter('field_tags.name', 'ai','=')
+
+  const articles = await client.getNodes('article', '', apiParams);
+
+  // List articles
+  {articles.data.map((article, index) => (
+    <li key={index} className="max-w-sm overflow-hidden rounded shadow-lg">
+        
+        <a href={`/node/${article.drupal_internal__nid}`} className="font-medium text-red-600 hover:text-red-700">
+        {article.field_image?.image_style_uri?.wide ? (
+            <Image
+            src={article.field_image?.image_style_uri?.wide}
+            alt=""
+            width={320}
+            height={180}
+            sizes="(min-width: 1024px) 32rem, 20rem"
+            className="mb-0 aspect-video w-full bg-zinc-100 object-cover dark:bg-zinc-800"
+            />
+        ) : (
+            <div className="mb-0 flex aspect-video w-full items-center justify-center bg-zinc-100 object-cover dark:bg-zinc-800">
+            <span className="text-sm text-gray-300">No image</span>
+            </div>
+        )}
+
+        <div className="px-6 pb-2 pt-4">
+            <h2 className="mb-2 text-xl">{article.title}</h2>
+        </div>
+        </a>
+    </li>
+  ))}
+
+```
+
+## NextJS
+
+We recomment you to use the official starterkit for NextJS https://github.com/NETNODEAG/nodehive-nextjs-starter.
+
+## Other frameworks
+
+The NodeHive client library is designed to work with any frontend framework.

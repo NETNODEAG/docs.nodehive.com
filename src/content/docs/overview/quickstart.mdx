@@ -3,59 +3,38 @@ title: Quickstart
 description: TODO
 ---
 
-# Quickstart
-
 To get up and running with your NodeHive project, you need:
 
 - A NodeHive backend instance
-- A javascript frontend
+- A javascript frontend like NextJS
 
 ## Important note
 
 NodeHive core is open source and provides all you need to start your headless project. NETNODE AG (www.netnode.ch), the company behind NodeHive is also offering a hosted SaaS version (www.nodehiveapp.com). The SaaS version comes with a lot of predefined configuration and additional SaaS related functionality.
 
 
-## Start locally
+## Start local development
 
-### Install NodeHive backend locally
+### 1. Install NodeHive backend locally
 
-We recommend to use DDEV (https://ddev.com) for local development. We assume you have ddev installed.
+Follow the instructions on https://github.com/NETNODEAG/nodehive-headless-cms-ce
 
-```bash
-mkdir nodehive-backend
-cd nodehive-backend
-ddev config --project-type=drupal10 --docroot=web --create-docroot
-ddev start
-ddev composer create drupal/recommended-project
-ddev composer config minimum-stability dev 
-ddev composer require drush/drush drupal/gin drupal/gin_toolbar
-ddev composer require drupal/nodehive_core 'drupal/content_planner:2.0.x-dev@dev' -y
-ddev drush site:install --site-name=NodeHive --account-name=admin --account-pass=admin -y
-ddev drush theme:enable gin -y
-ddev drush config-set system.theme admin gin -y
-ddev drush config-set system.theme default gin -y
-ddev drush config-set system.site page.front "/user/login?destination=/admin/content-planner/dashboard" -y
-ddev drush en nodehive_core gin_toolbar content_planner -y
-ddev launch
-```
 
-Login with username admin and password admin
+### 2. Install NodeHive Starter Frontend
 
-### Install NodeHive Starter Frontend
-
-https://github.com/NETNODEAG/nodehive-nextjs-starter
+Follow the instructions on https://github.com/NETNODEAG/nodehive-nextjs-starter
 
 ```bash
 npx create-next-app frontend.example.ch -e https://github.com/NETNODEAG/nodehive-nextjs-starter/tree/main
 ```
 
-### Example .env
+#### Example .env.local
 
 ```
   # Required for NodeHive
-  NEXT_PUBLIC_DRUPAL_REST_BASE_URL="https://nodehive-backend.ddev.site"
-  NEXT_PUBLIC_DRUPAL_BASE_URL="https://nodehive-backend.ddev.site"
-  NEXT_IMAGE_DOMAIN="nodehive-backend.ddev.site"
+  NEXT_PUBLIC_DRUPAL_REST_BASE_URL="https://nodehive-ce.ddev.site"
+  NEXT_PUBLIC_DRUPAL_BASE_URL="https://nodehive-ce.ddev.site"
+  NEXT_IMAGE_DOMAIN="nodehive-ce.ddev.site"
   NEXT_PUBLIC_NODEHIVE_SPACE_ID=1
   NODEHIVE_STARTPAGE_SLUG=/node/1
   NODEHIVE_DEFAULT_LANGUAGE=en

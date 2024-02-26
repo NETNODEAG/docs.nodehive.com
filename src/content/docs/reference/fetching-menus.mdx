@@ -1,0 +1,95 @@
+---
+title: Fetching Menus
+description: TODO
+---
+
+Load a menu from the NodeHive backend.
+
+```js
+const navigation = await client.getMenuItems('main');
+```
+
+### Menu items playload example
+
+This is an example of a menu item array you get from NodeHive backend.
+
+```js
+data: [
+    {
+      type: 'menu_link_content--menu_link_content',
+      id: 'menu_link_content:bcfb7d7e-05fe-454b-a6e6-93664fad7caf',
+      enabled: true,
+      expanded: false,
+      menu_name: 'main',
+      options: [],
+      parent: '',
+      title: 'Home',
+      url: '/home',
+      weight: -50
+    },
+    {
+      type: 'menu_link_content--menu_link_content',
+      id: 'menu_link_content:80d68948-b16e-49a5-a946-e8e18292dcba',
+      enabled: true,
+      expanded: false,
+      menu_name: 'main',
+      options: [],
+      parent: '',
+      title: 'Products',
+      url: '/products',
+      weight: -49
+    },
+    {
+      type: 'menu_link_content--menu_link_content',
+      id: 'menu_link_content:199b9bff-b303-4169-80e9-ca651d4642e5',
+      enabled: true,
+      expanded: false,
+      menu_name: 'main',
+      options: [],
+      parent: '',
+      title: 'About',
+      url: '/about',
+      weight: -48
+    }
+  ]
+  ```
+
+### Example: Render a menu in a nextjs 14 server side component
+
+Menu.js
+
+```js
+import Link from 'next/link';
+
+import { createServerClient } from '@/lib/nodehive';
+
+function NavLink({ href, children }) {
+  return (
+    <Link href={href} className="transition hover:text-teal-500">
+      {children}
+    </Link>
+  );
+}
+
+export async function Menu() {
+  const client = createServerClient();
+  const navigation = await client.getMenuItems('main');
+
+  return (
+    <div>
+      <div className="flex gap-4 text-sm font-medium text-zinc-800 ">
+        {navigation.data.map((item) => (
+          <NavLink
+            key={item.title}
+            href={item.url}
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            {item.title}
+          </NavLink>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+```

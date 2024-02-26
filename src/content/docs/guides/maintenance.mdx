@@ -1,0 +1,14 @@
+---
+title: NodeHive Maintenance
+description: TODO
+---
+
+## Update NodeHive
+
+```bash
+ ddev composer update
+ ddev drush updb
+
+ # Recommended but optional: Apply nodehive core preset
+ddev drush beekeeper:install --preset=nodehive
+```

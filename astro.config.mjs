@@ -20,6 +20,7 @@ export default defineConfig({
 						{ label: 'FAQ', link: '/overview/faq/' },
 						{ label: 'Videos', link: '/overview/videos/' },
 						{ label: 'About', link: '/overview/about/' },
+						
 					],
 				},
 				{
@@ -32,12 +33,22 @@ export default defineConfig({
 						{ label: 'Selfhost NodeHive', link: '/guides/selfhost-nodehive/' },
 						{ label: 'Multilingual', link: '/guides/multilingual/' },
 						{ label: 'Visual Editor', link: '/guides/visual-editor/' },
-						{ label: 'Example Guide', link: '/guides/example/' },
+						{ label: 'Maintenance', link: '/guides/maintenance/' },
+						{ label: 'Presets & Beekeper', link: '/guides/presets/' },
 					],
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'nodehive-js',
+					items: [
+						// Each item here is one entry in the navigation menu.
+						{ label: 'Introduction', link: '/reference/introduction/' },
+						{ label: 'Routing', link: '/reference/routing/' },
+						{ label: 'Fetching Nodes', link: '/reference/fetching-nodes/' },
+						{ label: 'Fetching Menus', link: '/reference/fetching-menus/' },
+						{ label: 'Fetching Fragments & Areas', link: '/reference/fetching-fragments-areas/' },
+						{ label: 'Fetching translated paths', link: '/reference/fetching-translated-paths/' },
+					],
+					
 				},
 			],
 		}),

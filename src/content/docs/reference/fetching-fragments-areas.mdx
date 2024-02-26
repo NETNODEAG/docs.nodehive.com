@@ -1,0 +1,85 @@
+---
+title: Fetching Fragments and areas
+description: TODO
+---
+
+## Fetch a fragment
+
+Load a single fragment from the backend.
+
+```js
+const websitetitle = await client.getFragment('35248304-ec3b-45f2-9aad-8284fe791af1', 'simple_label');
+```
+
+## Example payload
+```js
+  data: {
+    type: 'nodehive_fragment--simple_label',
+    id: '35248304-ec3b-45f2-9aad-8284fe791af1',
+    links: { self: [Object] },
+    drupal_internal__fid: 2,
+    drupal_internal__vid: 2,
+    langcode: 'en',
+    title: 'Website Title',
+    status: true,
+    created: '2024-01-23T11:33:48+00:00',
+    changed: '2024-01-23T11:34:58+00:00',
+    default_langcode: true,
+    revision_translation_affected: true,
+    field_label: 'lukasfischer.ch/',
+    nodehive_fragment_type: {
+      type: 'nodehive_fragment_type--nodehive_fragment_type',
+      id: '377456d7-c72b-4579-8c1c-9a8375c95633',
+      meta: [Object]
+    },
+    uid: {
+      type: 'user--user',
+      id: 'e83a3672-ee58-43fe-b16d-fc1938e9c4f7',
+      meta: [Object]
+    },
+    space_id: [ [Object] ]
+  }
+```
+
+The following example shows how you can use nodehive-js to laod single fragments and a collection of fragments within an area.
+
+Example layout.tsx
+
+```js
+import { PreFooter } from '@/components/PreFooter';
+import { Footer } from '@/components/Footer';
+import Header from '@/components/Header';
+
+const inter = Inter({ subsets: ['latin'] });
+
+import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
+import { createServerClient } from '@/lib/nodehive';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+  // Create NodeHive client instance
+  const client = createServerClient();
+
+  // Get fragement data for "websitetitle" from backend
+  const websitetitle = client.getFragment('c475eb7e-4323-4310-822f-5cc49f54093a', 'html_fragment');
+
+  // Get area data for "prefooter" from backend
+  const prefooter = client.getArea('5f786ea4-2a56-45f1-98f8-63b4d377c3e8');
+
+  return (
+    <html>
+      <body>
+        <Header title={websitetitle}></Header>
+        {children}
+        <PreFooter data={prefooter}></PreFooter>
+        <Footer></Footer>
+      </body>
+    </html>
+  );
+}
+
+```
