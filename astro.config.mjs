@@ -19,10 +19,13 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
+					label: 'Home',
+					link: '/',
+				},
+				{
 					label: 'Developer Docs',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Introduction', link: '/overview/introduction/' },
 						{ label: 'Quickstart', link: '/overview/quickstart/' },
 						{ label: 'NodeHive SaaS', link: '/overview/nodehive-saas/' },
 						{ label: 'FAQ', link: '/overview/faq/' },
