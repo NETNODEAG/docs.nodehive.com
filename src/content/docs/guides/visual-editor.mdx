@@ -6,7 +6,19 @@ description: TODO
 
 NodeHive comes with a visual editor which helps content editors work with content directly from the frontend. To enable the visual editor, the frontend code needs to communicate with NodeHive.
 
+# How to configure Item
+
+WIP documentation
+
+1. /app/nodehive/* should exist
+2. <Connector> component should be added to the global layout.tsx
+3. /app/api/nodehive/revalidate.tsx should exist
+4. /app/nodehive/login.tsx should exist
+5. Wrap all components with the respective Wrapper Components
+
 # Reference implementation
+
+The best way to strat is using the reference implementation.
 
 Consult https://github.com/NETNODEAG/nodehive-nextjs-starter/tree/main/src/nodehive to see how visual editor components are used.
 
@@ -24,3 +36,6 @@ Add the following line to .env file
 ```js
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
+import type { Item } from "@supabase/ui/dist/cjs/components/Accordion/Accordion"
+import type { ExitStatus } from "typescript"
+
