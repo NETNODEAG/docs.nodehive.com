@@ -44,6 +44,7 @@ export default defineConfig({
 						{ label: 'Selfhost NodeHive', link: '/guides/selfhost-nodehive/' },
 						{ label: 'Multilingual', link: '/guides/multilingual/' },
 						{ label: 'Visual Editor', link: '/guides/visual-editor/' },
+						{ label: 'Content Planner', link: '/guides/content-planner/' },
 						{ label: 'Maintenance', link: '/guides/maintenance/' },
 						{ label: 'Presets & Beekeper', link: '/guides/presets/' },
 					],
