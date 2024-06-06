@@ -1,8 +1,7 @@
 ---
-title: Visual Editor
-description: Guide: How to configure the NodeHive Visual Editor
+title: NodeHive Visual Editor
+description: Guide How to configure the NodeHive Visual Editor
 ---
-# NodeHive Visual Editor
 
 NodeHive comes with a visual editor which helps content editors work with content directly from the frontend. To enable the visual editor, the frontend code needs to communicate with NodeHive.
 
@@ -10,11 +9,12 @@ NodeHive comes with a visual editor which helps content editors work with conten
 
 WIP documentation
 
-1. /app/nodehive/* should exist
-2. <Connector> component should be added to the global layout.tsx
-3. /app/api/nodehive/revalidate.tsx should exist
-4. /app/nodehive/login.tsx should exist
-5. Wrap all components with the respective Wrapper Components
+1. Copy the full /nodehive folder from https://github.com/NETNODEAG/nodehive-nextjs-starter/tree/main/src/nodehive/* to [yourapp]/app/nodehive/*
+2. \<Connector> component should be added to the global layout.tsx
+3. Copy https://github.com/NETNODEAG/nodehive-nextjs-starter/blob/main/src/app/api/nodehive/revalidate/route.ts to [YOURAPP]/app/api/nodehive/revalidate/route.ts
+4. Copy https://github.com/NETNODEAG/nodehive-nextjs-starter/blob/main/src/app/nodehive/login/page.tsx to [YOURAPP]/app/nodehive/login/page.tsx should exist
+5. Wrap all editable components with the respective wrapper components
+6. Configure form 
 
 # Reference implementation
 
@@ -36,6 +36,4 @@ Add the following line to .env file
 ```js
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
-import type { Item } from "@supabase/ui/dist/cjs/components/Accordion/Accordion"
-import type { ExitStatus } from "typescript"
 
