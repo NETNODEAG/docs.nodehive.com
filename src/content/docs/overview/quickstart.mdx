@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: TODO
+description: Quickstart with NodeHive Headless CMS
 ---
 
 To get up and running with your NodeHive project, you need:
@@ -8,32 +8,20 @@ To get up and running with your NodeHive project, you need:
 - A NodeHive backend instance
 - A javascript frontend like NextJS
 
-## Important note
-
-NodeHive core is open source and provides all you need to start your headless project. NETNODE AG (www.netnode.ch), the company behind NodeHive is also offering a hosted SaaS version (www.nodehiveapp.com). The SaaS version comes with a lot of predefined configuration and additional SaaS related functionality.
+:::note
+NodeHive Headless CMS is open source and provides all you need to start your headless project.
+We also offer a hosted SaaS version available through www.nodehive.com.
+:::
 
 ## Start local development
 
 ### 1. Install NodeHive backend locally
 
-Follow the instructions on https://github.com/NETNODEAG/nodehive-headless-cms-ce
+- Follow the instructions on https://github.com/NETNODEAG/nodehive-headless-cms-ce
+- [Video Tutorial](https://www.youtube.com/watch?v=BrL3uH73CaA&list=PLx8ET0RIaWG2NcK6TiM7fC3TOOkejYNzF&index=12&)
 
 ### 2. Install NodeHive Starter Frontend
 
-Follow the instructions on https://github.com/NETNODEAG/nodehive-nextjs-minimal-starter
+- Follow the instructions on https://github.com/NETNODEAG/nodehive-nextjs-minimal-starter
+- [Video Tutorial](https://www.youtube.com/watch?v=zXmCDxb-tBE&list=PLx8ET0RIaWG2NcK6TiM7fC3TOOkejYNzF)
 
-```bash
-npx create-next-app frontend.example.ch -e https://github.com/NETNODEAG/nodehive-nextjs-minimal-starter/tree/main
-```
-
-#### Example .env.local
-
-```
-  # Required for NodeHive
-  NEXT_PUBLIC_DRUPAL_REST_BASE_URL="https://nodehive-ce.ddev.site"
-  NEXT_PUBLIC_DRUPAL_BASE_URL="https://nodehive-ce.ddev.site"
-  NEXT_IMAGE_DOMAIN="nodehive-ce.ddev.site"
-  NEXT_PUBLIC_NODEHIVE_SPACE_ID=1
-  NODEHIVE_STARTPAGE_SLUG=/node/1
-  NODEHIVE_DEFAULT_LANGUAGE=en
-```

@@ -40,7 +40,7 @@ export default defineConfig({
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Content Modelling', link: '/guides/content-modelling/' },
 						{ label: 'API Reference', link: '/guides/intro-api/' },
-						{ label: 'Frontend starter', link: '/guides/build-frontend/' },
+						{ label: 'Demo frontend', link: '/guides/build-demo-frontend/' },
 						{ label: 'Selfhost NodeHive', link: '/guides/selfhost-nodehive/' },
 						{ label: 'Multilingual', link: '/guides/multilingual/' },
 						{ label: 'Visual Editor', link: '/guides/visual-editor/' },
