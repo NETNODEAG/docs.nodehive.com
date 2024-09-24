@@ -11,6 +11,10 @@ export default defineConfig({
 				dark: './src/assets/nodehive_logo_white.svg',
 				replacesTitle: true,
 			},
+			customCss: [
+				// Relative path to your custom CSS file
+				'./src/styles/custom.css',
+			],
 			social: {
 				github: 'https://github.com/NETNODEAG/nodehive-headless-cms-ce',
 			},

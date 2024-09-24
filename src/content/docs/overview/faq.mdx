@@ -1,17 +1,17 @@
 ---
 title: FAQ
-description: TODO
+description: FAQs about NodeHive Headless CMS.
 ---
 
-## Who is behind NodeHive?
+### Who is behind NodeHive?
 
 NodeHive is built and maintained by NETNODE AG (www.netnode.ch).
 
-## What licence is NodeHive?
+### What licence is NodeHive?
 
 NodeHive is built on top of Drupal. Therefor it inherits the licence of Drupal https://www.drupal.org/about/licensing#drupal-license.
 
-## What is the NodeHive Community Edition?
+### What is the NodeHive Community Edition?
 
 NodeHive CE is Open Source software. The code can be found on https://github.com/NETNODEAG/nodehive-headless-cms-ce as well as in drupalcode hosted repositories.
 
@@ -20,3 +20,25 @@ We apply an Open Core strategy which means all the NodeHive Core functionality i
 NETNODE AG maintains a SaaS and Enterprise edition which include additional features and integrations to third party tools. We do not publish these repos. If you are looking for support, contact us via www.nodehive.com/contact.
 
 This allows us to build and maintain the open solution in a sustainable fashion.
+
+### Why did you build a new `nodehive-js` client instead of extending `next-drupal`?
+
+Our goal was to provide a straightforward tool that a frontend developer can easily use. For example, with our client, you can simply call `getNodes('article')` and render the data.
+We built on the `jsonapiParams` library, and you can still use the NodeHive backend with `next-drupal` or directly call JSON:API if preferred. 
+This approach also allows us to control the roadmap ourselves.
+
+### Is there support for views and fetching from search API indexes in NodeHive?
+
+We recommend directly calling JSON:API for fetching data to create lists. Of course, you can always expose data via a rest view which then can be consumed by your frontend code.
+
+### I don't fully understand the concept of areas and fragments. Are they similar to layouts and blocks?
+
+Areas and fragments are somewhat similar to layouts and blocks but are designed with headless CMS in mind. You can learn more about it in our [content modeling guide](https://docs.nodehive.com/guides/content-modelling/).
+
+### Is only JSON:API supported with NodeHive, or are there plans to support GraphQL as well?
+
+JSON:API is our default. GraphQL is on our roadmap, and we are open to contributions to help us integrate it.
+
+### How compatible is NodeHive with other technologies like Vue, Nuxt, Next, Angular, Laravel, etc.?
+
+NodeHive is fully compatible with various technologies. It essentially involves applying the space id as a filters to JSON:API, making it versatile across different tech stacks.
