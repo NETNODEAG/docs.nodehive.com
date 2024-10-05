@@ -16,10 +16,21 @@ The client library exists to make data access to the backend super easy. It offe
 ```bash
   npm install nodehive-js
 ```
+### Most basic example
+```js
+import { NodeHiveClient } from 'nodehive-js';
+const client = new NodeHiveClient('https://demo.nodehive.app');
+const nodes = await client.getNodes('article');
+console.log(nodes);
+```
 
 ### Code example with React and Tailwind
 
 ```js
+  import { NodeHiveConfig } from '@/nodehive/jsonapi-config';
+  import { NodeHiveClient, NodeHiveOptions } from 'nodehive-js';
+  import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
+  
   // Create NodeHiveClient instance
   const client = new NodeHiveClient(
     process.env.NEXT_PUBLIC_DRUPAL_REST_BASE_URL,
@@ -41,12 +52,13 @@ When debug mode is enabled, the client will log all requests and responses to th
 
 ```js
   // Load articles
-  const nodes = client.getNodes('articles')
+  const nodes = client.getNodes('article')
 ```
 
 #### Load the last 10 articles with sorting, limit and tag filter
 
 ```js
+  import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
   // Add custom api params
   const apiParams = new DrupalJsonApiParams();
   apiParams.addSort('created', 'DESC');
