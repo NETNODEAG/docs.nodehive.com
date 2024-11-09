@@ -25,8 +25,11 @@ drush beekeeper:install --preset=your_preset_name
 ```
 
 ```
-# To apply NodeHive core preset, run
+# To apply NodeHive core preset (this will run all below)
 drush beekeeper:install --preset=nodehive
+
+# To apply NodeHive default configurations, run
+drush beekeeper:default-config:install
 
 # To only apply NodeHive core permission preset, run
 drush beekeeper:permission:install --preset=nodehive
