@@ -18,26 +18,28 @@ drush beekeeper:install
 drush beekeeper:install --preset=nodehive
 ```
 
-You can create your own presets and apply as follows:
 
+To apply NodeHive core preset (this will run all below)
 ```
-drush beekeeper:install --preset=your_preset_name
-```
-
-```
-# To apply NodeHive core preset (this will run all below)
 drush beekeeper:install --preset=nodehive
+```
 
-# To apply NodeHive default configurations, run
+To apply NodeHive default configurations, run
+```
 drush beekeeper:default-config:install
-
-# To only apply NodeHive core permission preset, run
+```
+To only apply NodeHive core permission preset, run
+```
 drush beekeeper:permission:install --preset=nodehive
+```
 
-# To only apply NodeHive core menu preset, run
+To only apply NodeHive core menu preset, run
+```
 drush beekeeper:menu:install --preset=nodehive
+```
 
-# To only apply NodeHive core drush commands preset, run
+To only apply NodeHive core drush commands preset, run
+```
 drush beekeeper:drush:install --preset=nodehive
 ```
 
@@ -55,4 +57,10 @@ In your custom module, create the following folders and files:
         > beekeeper.drush.yml
         > beekeeper.menu.yml
         > beekeeper.permission.yml
+```
+
+You can create your own presets and apply as follows:
+
+```
+drush beekeeper:install --preset=your_preset_name
 ```
