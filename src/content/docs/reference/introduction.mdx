@@ -16,15 +16,27 @@ The client library exists to make data access to the backend super easy. It offe
 ```bash
   npm install nodehive-js
 ```
-### Most basic example
+
+### Examples
 ```js
 import { NodeHiveClient } from 'nodehive-js';
 const client = new NodeHiveClient('https://demo.nodehive.app');
+
+// Load nodes of content type article
 const nodes = await client.getNodes('article');
-console.log(nodes);
+
+// Load navigation menu "main"
+const navigation = await client.getMenuItems('main');
+
+// Load entity based on slug
+const entity = await client.getResourceBySlug('node/1', 'en'); 
+
+// Get translated paths
+const translatedPaths = await client.getTranslatedPaths('/node/1');
 ```
 
-### Code example with React and Tailwind
+
+### Advanced example
 
 ```js
   import { NodeHiveConfig } from '@/nodehive/jsonapi-config';
@@ -46,13 +58,6 @@ When debug mode is enabled, the client will log all requests and responses to th
 ```js
   // Enable debug mode
   options.debug = true;
-```
-
-#### Load articles
-
-```js
-  // Load articles
-  const nodes = client.getNodes('article')
 ```
 
 #### Load the last 10 articles with sorting, limit and tag filter
@@ -99,7 +104,7 @@ When debug mode is enabled, the client will log all requests and responses to th
 
 ## NextJS
 
-We recomment you to use the official starterkit for NextJS https://github.com/NETNODEAG/nodehive-nextjs-starter.
+We recomment you to use the official starterkit for Next.js https://github.com/NETNODEAG/nodehive-nextjs-starter.
 
 ## Other frameworks
 
