@@ -26,7 +26,7 @@ const client = new NodeHiveClient('https://demo.nodehive.app');
 const nodes = await client.getNodes('article');
 
 // Get a single node
-const node = await client.getNodes('60bc852e-d28c-4127-b662-272426da775f', 'article', 'en');
+const node = await client.getNode('60bc852e-d28c-4127-b662-272426da775f', 'article', 'en');
 
 // Load taxonomy terms
 const tags = getTaxonomyTerms('tags', 'en');
