@@ -25,6 +25,21 @@ const client = new NodeHiveClient('https://demo.nodehive.app');
 // Load nodes of content type article
 const nodes = await client.getNodes('article');
 
+// Get a single node
+const node = await client.getNodes('60bc852e-d28c-4127-b662-272426da775f', 'article', 'en');
+
+// Load taxonomy terms
+const tags = getTaxonomyTerms('tags', 'en');
+
+// Load a single taxonomy term
+const tag = getTaxonomyTerm('5', '1', 'en');
+
+// Load media entities
+const images = getMedias('image', 'en');
+
+// Load a single taxonomy term
+const image = getMedia('60bc852e-d28c-4127-b662-272426da775f', 'image');
+
 // Load navigation menu "main"
 const navigation = await client.getMenuItems('main');
 
@@ -33,6 +48,13 @@ const entity = await client.getResourceBySlug('node/1', 'en');
 
 // Get translated paths
 const translatedPaths = await client.getTranslatedPaths('/node/1');
+
+// Get a fragment
+const fragment = await client.getFragment('ecda70cd-6ced-4e1a-9dd1-74af1641010b', 'logo', 'en');
+
+// Get an area with all its fragments
+const area = await client.getFragment('b339b5a8-8de4-4cd1-b9cf-0808a7ec2885', 'footer_section', 'en');
+
 ```
 
 
