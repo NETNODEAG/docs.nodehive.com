@@ -37,6 +37,8 @@ You need to configure the following on your NodeHive instance:
 - You may want to disable and configure JSON:API resources /admin/config/services/jsonapi/resource_types
 - Visit https://nodehive-explorer.vercel.app/ and test your configuration
 
+With this method, no Bearer token is set in the Authorization header.
+
 #### NodeHive API Key authentication
 
 This is the preferred and simplest method to access content which is public but the api endpoints are protected.
@@ -49,6 +51,7 @@ This is the preferred and simplest method to access content which is public but 
 - Visit https://nodehive-explorer.vercel.app/ and test your configuration
 - In your app, define the NODEHIVE_API_KEY environment variable with the api key value you created before
 
+With this method, the NodeHive API Key is set as Bearer token in the Authorization header.
 
 #### OAuth2 authentication
 
@@ -59,15 +62,17 @@ This method is used to access user specific content.
   - Select Granularity "Role"
   - Select in Role the role you want to allow (e.g. "authenticated")
 - Go to /admin/config/services/consumer and create a new consumer (or use default)
-- When creating a consumer, select Grant types "Password" and define token expiration time
-- Select the scope you created before
+  - Creating a consumer, select Grant types "Password"
+  - Select the scope you created before
+  - Define token expiration time
 - Visit https://nodehive-explorer.vercel.app/ and test your configuration
 - In your app, define
   - NODEHIVE_OAUTH2_CLIENT_ID
   - NODEHIVE_OAUTH2_CLIENT_SECRET
   - With the "login" method of the client, you can now authenticate a user and access user specific content
 
-oauth2 will provide a token as well as a refresh token. The nodehive-js client will automatically handle token refresh for you. On /admin/config/people/simple_oauth/oauth2_token you can see active tokens and remove tokens if needed.
+With this method, nodehive-js will get an access token via POST /oauth/token and set the access token as Bearer token in the Authorization header.
+The nodehive-js client will automatically handle token refresh for you. On /admin/config/people/simple_oauth/oauth2_token you can see active tokens and remove tokens if needed.
 
 #### JWT authentication
 
@@ -76,6 +81,7 @@ This method is used to access user specific content and more lightweight than OA
 - User use the login method with username and password to get a JWT token
 - The nodehive-js client will automatically add the JWT token to all requests
 
+With this method, nodehive-js will get an access token via POST /jwt/token and set the access token as Bearer token in the Authorization header.
 JWT authentication does not provide a refresh token. It's also not possible to invalidate a JWT token. 
 
 
