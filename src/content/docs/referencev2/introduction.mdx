@@ -1,0 +1,84 @@
+---
+title: NodeHive JavaScript Client v2 / SDK BETA
+description: Introduction to the NodeHive JavaScript Client / SDK
+---
+
+NodeHive Client (https://www.npmjs.com/package/nodehive-js) is the offical JavaScript client library for JavaScript client library for NodeHive Headless CMS.
+
+## Goal
+
+The client library exists to make data access to the backend super easy. It offers several helper functions which allow you to load nodes, menus, taxonomies and much more without understanding the underlaying details.
+
+## How to use
+
+#### Install
+
+```bash
+  npm install nodehive-js
+```
+
+### Auth
+
+In NodeHive there are several auth options. Depending on your use case, you need one of the following auth methods.
+
+- No authentication (public access to public content)
+- NodeHive API Key authentication (access to protected content)
+- OAuth2 authentication (access to user specific content)
+- JWT authentication (access to user specific content)
+
+All of the above auth methods are supported by the nodehive-js JavaScript client.
+
+#### No authentication
+
+When no auth is provided, the client will access the API without any authentication. This is useful for public content.
+
+You need to configure the following on your NodeHive instance:
+- Got to /admin/people/permissions/anonymous and set the permission "Access API Endpoints"
+- You may want to disable and configure JSON:API resources /admin/config/services/jsonapi/resource_types
+- Visit https://nodehive-explorer.vercel.app/ and test your configuration
+
+#### NodeHive API Key authentication
+
+This is the preferred and simplest method to access content which is public but the api endpoints are protected.
+
+- Create an API Key in your NodeHive instance /nodehive/api-keys
+- In API Key creation, you have to select a user. The permissions of this user will be used for API access.
+- You likely want to create
+  - a new "api user"
+  - An api role with the permission "Access API Endpoints" and other permissions based on your use className
+- Visit https://nodehive-explorer.vercel.app/ and test your configuration
+- In your app, define the NODEHIVE_API_KEY environment variable with the api key value you created before
+
+
+#### OAuth2 authentication
+
+This method is used to access user specific content.
+
+- Go to /admin/config/people/simple_oauth/oauth2_scope/dynamic/add and create a new scope (e.g. "read")
+  - Select Grant types "Password"
+  - Select Granularity "Role"
+  - Select in Role the role you want to allow (e.g. "authenticated")
+- Go to /admin/config/services/consumer and create a new consumer (or use default)
+- When creating a consumer, select Grant types "Password" and define token expiration time
+- Select the scope you created before
+- Visit https://nodehive-explorer.vercel.app/ and test your configuration
+- In your app, define
+  - NODEHIVE_OAUTH2_CLIENT_ID
+  - NODEHIVE_OAUTH2_CLIENT_SECRET
+  - With the "login" method of the client, you can now authenticate a user and access user specific content
+
+oauth2 will provide a token as well as a refresh token. The nodehive-js client will automatically handle token refresh for you. On /admin/config/people/simple_oauth/oauth2_token you can see active tokens and remove tokens if needed.
+
+#### JWT authentication
+
+This method is used to access user specific content and more lightweight than OAuth2.
+
+- User use the login method with username and password to get a JWT token
+- The nodehive-js client will automatically add the JWT token to all requests
+
+JWT authentication does not provide a refresh token. It's also not possible to invalidate a JWT token. 
+
+
+### Examples
+```js
+```
