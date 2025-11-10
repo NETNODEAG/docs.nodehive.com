@@ -66,6 +66,13 @@ export default defineConfig({
 					],
 
 				},
+				{
+					label: 'nodehive-js v2 (beta)',
+					items: [
+						// Each item here is one entry in the navigation menu.
+						{ label: 'Introduction', link: '/referencev2/introduction/' },					],
+
+				},
 			],
 		}),
 	],
