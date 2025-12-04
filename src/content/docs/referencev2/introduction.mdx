@@ -61,16 +61,16 @@ This method is used to access user specific content.
   - Select Grant types "Password"
   - Select Granularity "Role"
   - Select in Role the role you want to allow (e.g. "authenticated")
+- Create a "frontend user"
 - Go to /admin/config/services/consumer and create a new consumer (or use default)
-  - Creating a consumer, select Grant types "Password"
-  - Select the scope you created before
+  - Creating a consumer, select Grant types "Password", ""
   - Define token expiration time
 - Visit https://nodehive-explorer.vercel.app/ and test your configuration
 - In your app, define
   - NODEHIVE_OAUTH2_CLIENT_ID
   - NODEHIVE_OAUTH2_CLIENT_SECRET
   - With the "login" method of the client, you can now authenticate a user and access user specific content
-
+- Enable json:api write /admin/config/services/jsonapi
 With this method, nodehive-js will get an access token via POST /oauth/token and set the access token as Bearer token in the Authorization header.
 The nodehive-js client will automatically handle token refresh for you. On /admin/config/people/simple_oauth/oauth2_token you can see active tokens and remove tokens if needed.
 
