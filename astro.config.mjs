@@ -43,7 +43,17 @@ export default defineConfig({
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Content Modelling', link: '/guides/content-modelling/' },
-						{ label: 'API Reference', link: '/guides/intro-api/' },
+						{
+							label: 'API',
+							collapsed: true,
+							items: [
+								{ label: 'Overview', link: '/guides/api/' },
+								{ label: 'NodeHive Public API', link: '/guides/api/nodehive-api/' },
+								{ label: 'JSON:API', link: '/guides/api/jsonapi/' },
+								{ label: 'GraphQL', link: '/guides/api/graphql/' },
+								{ label: 'REST', link: '/guides/api/rest/' },
+							],
+						},
 						{ label: 'Demo frontend', link: '/guides/build-demo-frontend/' },
 						{ label: 'Selfhost NodeHive', link: '/guides/selfhost-nodehive/' },
 						{ label: 'Multilingual', link: '/guides/multilingual/' },

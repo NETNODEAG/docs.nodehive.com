@@ -1,0 +1,27 @@
+---
+title: API Overview
+description: Overview of the available APIs in NodeHive Headless CMS
+---
+
+NodeHive is built on Drupal and exposes several API options for fetching content. Choose the one that fits your use case best.
+
+## Recommended: nodehive-js Client
+
+For frontend projects, we recommend using the official **[nodehive-js](https://www.npmjs.com/package/nodehive-js)** client library. It wraps the JSON:API and handles routing, includes, and content fetching with a clean API.
+
+## Available APIs
+
+| API | Best for | Status |
+|-----|----------|--------|
+| [**NodeHive Public API**](/guides/api/nodehive-api/) | Simple read-only access, mobile apps, third-party integrations | Stable |
+| [**JSON:API**](/guides/api/jsonapi/) | Full content CRUD, complex queries, frontend apps with nodehive-js | Stable |
+| [**GraphQL**](/guides/api/graphql/) | Clients that prefer GraphQL query syntax | Available (Drupal contrib) |
+| [**REST**](/guides/api/rest/) | Simple entity access via Drupal's built-in REST module | Available (Drupal contrib) |
+
+## Which API should I use?
+
+**Building a Next.js or frontend app?** Use **JSON:API** with the nodehive-js client. It gives you the most flexibility for querying, filtering, and including related content.
+
+**Need a simple, stable read-only API for a mobile app or third-party integration?** Use the **NodeHive Public API**. It returns clean, pre-formatted JSON without needing to understand Drupal's entity structure.
+
+**Already using GraphQL or REST in your stack?** Both are available as Drupal contrib modules. They work with NodeHive content but are not NodeHive-specific — refer to the Drupal documentation for details.

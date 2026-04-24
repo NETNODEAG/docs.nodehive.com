@@ -1,0 +1,27 @@
+---
+title: REST API
+description: Using Drupal's built-in REST API with NodeHive
+---
+
+Drupal ships with a built-in [RESTful Web Services](https://www.drupal.org/docs/drupal-apis/restful-web-services-api) module that exposes entities as REST resources. This is available in NodeHive but is not NodeHive-specific.
+
+## When to use REST
+
+The REST module can be useful for:
+- Simple entity access when you need standard REST endpoints
+- Integrations with systems that expect traditional REST APIs
+- Cases where JSON:API's relationship model is more than you need
+
+For most use cases, we recommend the **[NodeHive Public API](/guides/api/nodehive-api/)** (for simple read-only access) or **[JSON:API](/guides/api/jsonapi/)** (for full CRUD with the nodehive-js client) instead.
+
+## Setup
+
+The REST module is included in Drupal core. Enable it and configure resource endpoints at `/admin/config/services/rest`.
+
+```bash
+drush en rest serialization
+```
+
+## Further Reading
+
+- [Drupal REST API Documentation](https://www.drupal.org/docs/drupal-apis/restful-web-services-api)

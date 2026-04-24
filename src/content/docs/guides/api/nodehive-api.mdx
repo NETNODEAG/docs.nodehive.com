@@ -1,0 +1,311 @@
+---
+title: NodeHive Public API
+description: Reference documentation for the NodeHive Public API (nodehive-api/v1)
+---
+
+The NodeHive Public API is a read-only REST API that provides clean, pre-formatted JSON for content, menus, and spaces. It is designed for third-party integrations, mobile apps, and any consumer that needs simple access to NodeHive content without understanding Drupal's internal entity structure.
+
+**Base URL:** `https://your-site.com/nodehive-api/v1`
+
+## Authentication
+
+All endpoints require the `access nodehive public api` permission, which is typically granted to anonymous users. No API key or token is needed for public content.
+
+## Language
+
+Language is selected via URL prefix:
+
+```
+/de/nodehive-api/v1/...    → German
+/en/nodehive-api/v1/...    → English
+```
+
+## Response Envelope
+
+Every response uses the same envelope format:
+
+```json
+// Success
+{ "status": "ok", "data": { ... } }
+
+// Error
+{ "status": "error", "error": { "code": 404, "message": "Not found." } }
+```
+
+---
+
+## Endpoints
+
+### 1. Index — `GET /nodehive-api/v1`
+
+Returns available languages, spaces, and all API endpoints with URLs. Use this as your starting point to discover what's available.
+
+**Example response:**
+
+```json
+{
+  "status": "ok",
+  "data": {
+    "name": "NodeHive Public API",
+    "version": "1.0",
+    "available_languages": ["de", "en"],
+    "available_spaces": [
+      { "id": "1", "name": "mysite.com" }
+    ],
+    "endpoints": [
+      { "name": "Menu API", "method": "GET", "available_menus": [...] },
+      { "name": "Spaces API", "method": "GET", "available_spaces": [...] },
+      { "name": "Node API", "method": "GET", "node_detail_pattern": ".../node/{node_id}" }
+    ]
+  }
+}
+```
+
+---
+
+### 2. Menu — `GET /nodehive-api/v1/menu/{menu_id}`
+
+Returns the full menu tree for a given menu.
+
+**Example response:**
+
+```json
+{
+  "status": "ok",
+  "data": {
+    "menu_id": "main",
+    "language": "de",
+    "items": [
+      {
+        "title": "Home",
+        "url": "/",
+        "description": "",
+        "expanded": false,
+        "weight": 0,
+        "children": []
+      }
+    ]
+  }
+}
+```
+
+**Errors:**
+- `403` — Excluded system menu (e.g. `admin`)
+- `404` — Menu not found
+
+---
+
+### 3. Space — `GET /nodehive-api/v1/space/{space_id}`
+
+Returns the space context: metadata, associated menus, content types with counts, and the frontpage node.
+
+**Example response:**
+
+```json
+{
+  "status": "ok",
+  "data": {
+    "id": "1",
+    "name": "mysite.com",
+    "language": "de",
+    "space_url": "https://mysite.com",
+    "space_type": "website",
+    "status": true,
+    "created": "2024-01-15T10:30:00+01:00",
+    "changed": "2024-02-20T14:22:15+01:00",
+    "tags": [{ "id": "5", "name": "Production" }],
+    "frontpage_node": {
+      "id": "10",
+      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "title": "Home",
+      "type": "page"
+    },
+    "menus": [
+      { "id": "main", "label": "Main Navigation", "url": "https://.../menu/main" }
+    ],
+    "content_types": [
+      { "id": "article", "label": "Article", "description": "...", "count": 42 }
+    ]
+  }
+}
+```
+
+**Errors:**
+- `404` — Space not found
+
+---
+
+### 4. List Nodes — `GET /nodehive-api/v1/space/{space_id}/nodes`
+
+Returns a paginated list of published nodes in a space. Each item contains metadata only unless you request specific fields.
+
+**Query Parameters:**
+
+| Param       | Default   | Description                                          |
+|-------------|-----------|------------------------------------------------------|
+| `type`      | —         | Filter by content type. Comma-separated: `type=article,page` |
+| `page`      | `0`       | Page number (0-indexed)                              |
+| `limit`     | `20`      | Items per page (1–100)                               |
+| `sort`      | `changed` | Sort field: `changed`, `created`, `title`            |
+| `direction` | `DESC`    | Sort direction: `ASC`, `DESC`                        |
+| `fields`    | —         | Comma-separated field names: `fields=field_image,field_tags` |
+
+**Example response:**
+
+```json
+{
+  "status": "ok",
+  "data": {
+    "space_id": "1",
+    "language": "de",
+    "items": [
+      {
+        "id": "123",
+        "uuid": "f39fa45c-1e44-48b8-bbf7-89496f09e988",
+        "title": "My Article",
+        "type": "article",
+        "type_label": "Article",
+        "status": true,
+        "created": "2024-01-15T10:30:00+01:00",
+        "changed": "2024-02-20T14:22:15+01:00",
+        "author": "Admin",
+        "url": "/nodehive-api/v1/node/123",
+        "thumbnail": "https://example.com/files/styles/medium/public/image.jpg",
+        "translations": ["de", "en"]
+      }
+    ],
+    "pager": {
+      "current_page": 0,
+      "total_pages": 5,
+      "total_items": 98,
+      "items_per_page": 20
+    }
+  }
+}
+```
+
+The `fields` key on each item only appears when you pass `?fields=...`. Without it, list items contain only metadata.
+
+**Errors:**
+- `404` — Space not found
+
+---
+
+### 5. Node Detail — `GET /nodehive-api/v1/node/{node_id}`
+
+Returns a single published node with all fields.
+
+**Query Parameters:**
+
+| Param    | Default | Description                                          |
+|----------|---------|------------------------------------------------------|
+| `fields` | —       | Comma-separated field names: `fields=field_body,field_image` |
+
+Without `?fields`, all custom fields are returned. With `?fields`, only the listed fields are included.
+
+**Example response:**
+
+```json
+{
+  "status": "ok",
+  "data": {
+    "id": "123",
+    "uuid": "f39fa45c-1e44-48b8-bbf7-89496f09e988",
+    "title": "My Article",
+    "type": "article",
+    "type_label": "Article",
+    "status": true,
+    "langcode": "de",
+    "created": "2024-01-15T10:30:00+01:00",
+    "changed": "2024-02-20T14:22:15+01:00",
+    "author": { "id": "1", "name": "Admin" },
+    "translations": ["de", "en"],
+    "spaces": [{ "id": "1", "name": "mysite.com" }],
+    "fields": {
+      "field_body": {
+        "value": "<p>HTML content</p>",
+        "summary": "Teaser text",
+        "format": "basic_html"
+      },
+      "field_image": {
+        "url": "https://example.com/files/image.jpg",
+        "alt": "Alt text",
+        "title": "",
+        "width": 800,
+        "height": 600
+      },
+      "field_tags": [
+        { "id": "5", "name": "Drupal" },
+        { "id": "8", "name": "CMS" }
+      ]
+    }
+  }
+}
+```
+
+**Errors:**
+- `404` — Node not found or unpublished
+
+---
+
+### 6. Node by UUID — `GET /nodehive-api/v1/node/uuid/{uuid}`
+
+Same as node detail, but looks up by UUID instead of numeric ID. Supports the same `?fields` parameter.
+
+**Errors:**
+- `404` — Node with UUID not found or unpublished
+
+---
+
+## Field Serialization
+
+Custom fields are under the `fields` key. Base metadata (id, title, status, dates, author) is always at the root level.
+
+| Field Type                  | Output Format                                              |
+|-----------------------------|------------------------------------------------------------|
+| `string`, `string_long`    | `"value"`                                                  |
+| `text`, `text_long`        | `{ "value": "...", "format": "basic_html" }`               |
+| `text_with_summary`        | `{ "value": "...", "summary": "...", "format": "..." }`    |
+| `boolean`                  | `true` / `false`                                           |
+| `integer`                  | `42`                                                       |
+| `decimal`, `float`         | `3.14`                                                     |
+| `datetime`                 | `"2024-01-15T10:30:00"`                                    |
+| `timestamp`                | `"2024-01-15T10:30:00+01:00"` (ISO 8601)                  |
+| `link`                     | `{ "uri": "https://...", "title": "Link text" }`           |
+| `image`                    | `{ "url": "https://...", "alt": "...", "title": "...", "width": 800, "height": 600 }` |
+| `file`                     | `{ "url": "https://...", "filename": "doc.pdf", "filemime": "application/pdf", "filesize": 12345 }` |
+| `entity_reference` → taxonomy | `{ "id": "5", "name": "Drupal" }`                      |
+| `entity_reference` → node  | `{ "id": "456", "uuid": "...", "title": "...", "type": "...", "url": "...", "fields": { ... } }` |
+| `entity_reference` → media | `{ "id": "10", "name": "photo.jpg", "bundle": "image", "url": "https://..." }` |
+| `entity_reference_revisions` → paragraph | `{ "id": "99", "type": "text_block", "fields": { ... } }` |
+| `list_string`              | `"option_value"`                                           |
+| `email`, `telephone`       | `"value"`                                                  |
+
+**Cardinality:** Single-value fields return the value directly. Multi-value fields return an array.
+
+**Reference depth:** Referenced nodes are resolved one level deep with their fields. At the second level, references return only `id`, `uuid`, `title`, `type`, `url` — no nested `fields` key.
+
+---
+
+## Typical Frontend Workflow
+
+```
+1. GET /nodehive-api/v1                                      → Discover spaces and endpoints
+2. GET /nodehive-api/v1/space/1                               → Get space context, menus, content types
+3. GET /nodehive-api/v1/space/1/nodes?type=article&limit=10   → List articles
+4. GET /nodehive-api/v1/node/123                              → Load full article
+5. GET /nodehive-api/v1/menu/main                             → Load navigation
+```
+
+## Caching
+
+All responses are cacheable. Cache varies by:
+- `user.permissions` — anonymous vs authenticated
+- `languages:language_interface` — language prefix
+- Query parameters (`type`, `page`, `limit`, `sort`, `direction`, `fields`)
+
+Cache is invalidated automatically when nodes, menus, or spaces change.
+
+## OpenAPI Specification
+
+An OpenAPI 3.0 specification is available in the module at `nodehive_public_api/openapi.yml`. You can use it to generate client SDKs or import into tools like Swagger UI or Postman.

@@ -1,0 +1,31 @@
+---
+title: GraphQL
+description: Using GraphQL with NodeHive via Drupal's contrib module
+---
+
+GraphQL is available in NodeHive through the Drupal [GraphQL](https://www.drupal.org/project/graphql) contrib module. This is not a NodeHive-specific feature — it uses Drupal's standard GraphQL implementation.
+
+## Setup
+
+The GraphQL module needs to be installed and configured separately:
+
+```bash
+composer require drupal/graphql
+drush en graphql
+```
+
+After enabling, configure your GraphQL server at `/admin/config/graphql`.
+
+## When to use GraphQL
+
+GraphQL can be a good fit when:
+- Your frontend team prefers GraphQL query syntax
+- You need fine-grained control over which fields are returned
+- You're building with a framework that has strong GraphQL tooling (e.g. Apollo Client)
+
+For most NodeHive projects, we recommend using **[JSON:API](/guides/api/jsonapi/)** with the nodehive-js client instead, as it requires less setup and is more tightly integrated with Drupal core.
+
+## Further Reading
+
+- [Drupal GraphQL Module](https://www.drupal.org/project/graphql)
+- [GraphQL Module Documentation](https://www.drupal.org/docs/contributed-modules/graphql)

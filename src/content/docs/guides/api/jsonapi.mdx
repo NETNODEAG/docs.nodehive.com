@@ -1,0 +1,67 @@
+---
+title: JSON:API
+description: Using Drupal's JSON:API with NodeHive for full content access
+---
+
+NodeHive is built on Drupal, which ships with the [JSON:API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module) module as a core feature. This gives you full read and write access to all content entities using the JSON:API specification.
+
+## When to use JSON:API
+
+JSON:API is the best choice when you need:
+- **Full CRUD operations** (create, read, update, delete)
+- **Complex filtering and sorting** with query parameters
+- **Relationship includes** to fetch related content in a single request
+- **Sparse fieldsets** to request only the fields you need
+
+## Base URL
+
+```
+https://your-site.com/jsonapi
+```
+
+## Using with nodehive-js
+
+The recommended way to consume JSON:API in frontend projects is through the **[nodehive-js](https://www.npmjs.com/package/nodehive-js)** client library. It handles routing, includes, and content fetching with a clean API.
+
+```typescript
+import { NodeHiveClient } from 'nodehive-js';
+
+const client = new NodeHiveClient({
+  baseUrl: 'https://your-site.com',
+});
+
+// Fetch a node by path
+const node = await client.getNodeByPath('/my-article');
+
+// Fetch a menu
+const menu = await client.getMenu('main');
+```
+
+See the [nodehive-js documentation](/reference/introduction/) for the full API reference.
+
+## Direct JSON:API Usage
+
+You can also query JSON:API directly. Some common patterns:
+
+```bash
+# List all articles
+GET /jsonapi/node/article
+
+# Get a specific node by UUID
+GET /jsonapi/node/article/{uuid}
+
+# Include related fields (e.g. images, tags)
+GET /jsonapi/node/article/{uuid}?include=field_image,field_tags
+
+# Filter by field value
+GET /jsonapi/node/article?filter[status]=1&filter[field_category.name]=News
+
+# Sparse fieldsets
+GET /jsonapi/node/article?fields[node--article]=title,field_body,field_image
+```
+
+## Further Reading
+
+- [Drupal JSON:API Documentation](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module)
+- [JSON:API Specification](https://jsonapi.org/)
+- [nodehive-js Reference](/reference/introduction/)
