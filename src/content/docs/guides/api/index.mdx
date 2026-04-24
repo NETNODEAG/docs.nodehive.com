@@ -13,7 +13,7 @@ For frontend projects, we recommend using the official **[nodehive-js](https://w
 
 | API | Best for | Status |
 |-----|----------|--------|
-| [**NodeHive Public API**](/guides/api/nodehive-api/) | Simple read-only access, mobile apps, third-party integrations | Stable |
+| [**NodeHive Public API**](/guides/api/nodehive-api/) | Menus and spaces metadata, third-party integrations | Stable |
 | [**JSON:API**](/guides/api/jsonapi/) | Full content CRUD, complex queries, frontend apps with nodehive-js | Stable |
 | [**GraphQL**](/guides/api/graphql/) | Clients that prefer GraphQL query syntax | Available (Drupal contrib) |
 | [**REST**](/guides/api/rest/) | Simple entity access via Drupal's built-in REST module | Available (Drupal contrib) |
@@ -22,6 +22,6 @@ For frontend projects, we recommend using the official **[nodehive-js](https://w
 
 **Building a Next.js or frontend app?** Use **JSON:API** with the nodehive-js client. It gives you the most flexibility for querying, filtering, and including related content.
 
-**Need a simple, stable read-only API for a mobile app or third-party integration?** Use the **NodeHive Public API**. It returns clean, pre-formatted JSON without needing to understand Drupal's entity structure.
+**Need menu trees or space metadata?** Use the **NodeHive Public API**. It returns clean, pre-formatted JSON for menus and spaces. For node/content access, use JSON:API.
 
 **Already using GraphQL or REST in your stack?** Both are available as Drupal contrib modules. They work with NodeHive content but are not NodeHive-specific — refer to the Drupal documentation for details.
